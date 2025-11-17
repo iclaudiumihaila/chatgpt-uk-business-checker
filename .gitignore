@@ -1,8 +1,21 @@
 node_modules/
 dist/
+public/
 .env
 *.log
 .DS_Store
 
 # Don't commit API keys!
 .claude/settings.json
+
+# Build artifacts
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db

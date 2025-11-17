@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UK Business Verification</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 20px;
+      color: #333;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #1a1a1a;
+        color: #e0e0e0;
+      }
+    }
+
+    .verification-card {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .verification-card {
+        background: #2a2a2a;
+      }
+    }
+
+    .company-header {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .company-header {
+        border-bottom-color: #404040;
+      }
+    }
+
+    .company-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 4px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .company-title {
+        color: #fff;
+      }
+    }
+
+    .company-subtitle {
+      font-size: 14px;
+      color: #666;
+      font-family: monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .company-subtitle {
+        color: #999;
+      }
+    }
+
+    .trust-score-section {
+      margin: 24px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .trust-score-section {
+        background: #1f1f1f;
+      }
+    }
+
+    .trust-score-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .trust-score-value {
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .risk-badge {
+      padding: 6px 14px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .risk-LOW {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .risk-MEDIUM {
+      background: #fff3e0;
+      color: #ef6c00;
+    }
+
+    .risk-HIGH {
+      background: #fff3e0;
+      color: #d84315;
+    }
+
+    .risk-VERY_HIGH {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .risk-LOW {
+        background: #1b5e20;
+        color: #a5d6a7;
+      }
+      .risk-MEDIUM {
+        background: #e65100;
+        color: #ffcc80;
+      }
+      .risk-HIGH {
+        background: #bf360c;
+        color: #ffab91;
+      }
+      .risk-VERY_HIGH {
+        background: #b71c1c;
+        color: #ef9a9a;
+      }
+    }
+
+    .progress-bar {
+      height: 12px;
+      background: #e0e0e0;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .progress-bar {
+        background: #404040;
+      }
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 0.5s ease;
+    }
+
+    .recommendation {
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 12px;
+      background: white;
+      border-radius: 8px;
+      border-left: 4px solid #111bf5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .recommendation {
+        background: #2a2a2a;
+      }
+    }
+
+    .indicators-section {
+      margin: 24px 0;
+    }
+
+    .indicator-group {
+      margin-bottom: 16px;
+    }
+
+    .indicator-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .indicator-list {
+      list-style: none;
+    }
+
+    .indicator-list li {
+      font-size: 14px;
+      padding: 6px 0;
+      padding-left: 24px;
+      line-height: 1.5;
+      color: #555;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .indicator-list li {
+        color: #bbb;
+      }
+    }
+
+    .company-details {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .company-details {
+        border-top-color: #404040;
+      }
+    }
+
+    .detail-row {
+      display: flex;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      width: 140px;
+      color: #666;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .detail-label {
+        color: #999;
+      }
+    }
+
+    .detail-value {
+      flex: 1;
+      color: #333;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .detail-value {
+        color: #ddd;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    (function() {
+      const data = window.openai?.toolOutput?.structuredContent;
+
+      if (!data) {
+        document.getElementById('root').innerHTML = '<div>Error loading company data</div>';
+        return;
+      }
+
+      const { company, trustAssessment, compliance, officers } = data;
+
+      const getProgressColor = (score) => {
+        if (score >= 70) return '#2e7d32';
+        if (score >= 50) return '#ef6c00';
+        if (score >= 30) return '#d84315';
+        return '#c62828';
+      };
+
+      const formatDate = (dateStr) => {
+        if (!dateStr) return 'N/A';
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      };
+
+      const formatAge = (ageMonths) => {
+        if (ageMonths < 12) return `${ageMonths} months`;
+        const years = Math.floor(ageMonths / 12);
+        const months = ageMonths % 12;
+        if (months === 0) return `${years} year${years > 1 ? 's' : ''}`;
+        return `${years} year${years > 1 ? 's' : ''}, ${months} month${months > 1 ? 's' : ''}`;
+      };
+
+      const html = `
+        <div class="verification-card">
+          <div class="company-header">
+            <div class="company-title">${company.name}</div>
+            <div class="company-subtitle">Company #${company.number}</div>
+          </div>
+
+          <div class="trust-score-section">
+            <div class="trust-score-header">
+              <div>
+                <div style="font-size: 12px; color: #666; margin-bottom: 4px;">TRUST SCORE</div>
+                <div class="trust-score-value" style="color: ${getProgressColor(trustAssessment.trustScore)}">
+                  ${trustAssessment.trustScore}/100
+                </div>
+              </div>
+              <span class="risk-badge risk-${trustAssessment.riskLevel}">
+                ${trustAssessment.riskLevel.replace('_', ' ')}
+              </span>
+            </div>
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                style="width: ${trustAssessment.trustScore}%; background-color: ${getProgressColor(trustAssessment.trustScore)}"
+              ></div>
+            </div>
+            <div class="recommendation">
+              ${trustAssessment.recommendation}
+            </div>
+          </div>
+
+          <div class="indicators-section">
+            ${trustAssessment.positiveIndicators.length > 0 ? `
+              <div class="indicator-group">
+                <div class="indicator-title">
+                  <span>✅</span>
+                  <span>Positive Indicators</span>
+                </div>
+                <ul class="indicator-list">
+                  ${trustAssessment.positiveIndicators.map(item => `<li>• ${item}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+
+            ${trustAssessment.warnings.length > 0 ? `
+              <div class="indicator-group">
+                <div class="indicator-title">
+                  <span>⚠️</span>
+                  <span>Warnings</span>
+                </div>
+                <ul class="indicator-list">
+                  ${trustAssessment.warnings.map(item => `<li>• ${item}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+
+            ${trustAssessment.redFlags.length > 0 ? `
+              <div class="indicator-group">
+                <div class="indicator-title">
+                  <span>🚫</span>
+                  <span>Red Flags</span>
+                </div>
+                <ul class="indicator-list">
+                  ${trustAssessment.redFlags.map(item => `<li>• ${item}</li>`).join('')}
+                </ul>
+              </div>
+            ` : '<div style="color: #2e7d32; font-size: 14px;">✅ No red flags detected</div>'}
+          </div>
+
+          <div class="company-details">
+            <div class="detail-row">
+              <div class="detail-label">Status:</div>
+              <div class="detail-value">${company.status}</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-label">Incorporated:</div>
+              <div class="detail-value">${formatDate(company.incorporated)} (${formatAge(company.ageMonths)})</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-label">Type:</div>
+              <div class="detail-value">${company.type.toUpperCase()}</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-label">Address:</div>
+              <div class="detail-value">${company.address}</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-label">Active Officers:</div>
+              <div class="detail-value">${officers.totalActive}</div>
+            </div>
+            ${officers.directors.length > 0 ? `
+              <div class="detail-row">
+                <div class="detail-label">Directors:</div>
+                <div class="detail-value">
+                  ${officers.directors.map(d => `${d.name} (${d.role})`).join('<br>')}
+                </div>
+              </div>
+            ` : ''}
+            ${compliance.lastAccountsDate ? `
+              <div class="detail-row">
+                <div class="detail-label">Last Accounts:</div>
+                <div class="detail-value">
+                  ${formatDate(compliance.lastAccountsDate)}
+                  ${compliance.accountsOverdue ? ' <span style="color: #c62828;">(OVERDUE)</span>' : ''}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('root').innerHTML = html;
+    })();
+  </script>
+</body>
+</html>
