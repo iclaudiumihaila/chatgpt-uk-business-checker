@@ -77,23 +77,51 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
   const uri = request.params.uri;
 
   try {
-    let widgetPath: string;
+    let widgetJS: string;
+    let widgetName: string;
 
     if (uri === 'ui://widget/search-carousel.html') {
-      widgetPath = join(__dirname, '../public/search-carousel.html');
+      const jsPath = join(__dirname, '../web/dist/search-carousel.js');
+      widgetJS = readFileSync(jsPath, 'utf-8');
+      widgetName = 'Search Carousel';
     } else if (uri === 'ui://widget/company-card.html') {
-      widgetPath = join(__dirname, '../public/company-card.html');
+      const jsPath = join(__dirname, '../web/dist/company-card.js');
+      widgetJS = readFileSync(jsPath, 'utf-8');
+      widgetName = 'Company Verification Card';
     } else {
       throw new Error(`Unknown widget URI: ${uri}`);
     }
 
-    const widgetContent = readFileSync(widgetPath, 'utf-8');
+    // Wrap React widget in HTML shell with window.openai integration
+    const widgetHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${widgetName}</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    ${widgetJS}
+  </script>
+</body>
+</html>`;
 
     return {
       contents: [{
         uri,
         mimeType: 'text/html+skybridge',
-        text: widgetContent
+        text: widgetHTML
       }]
     };
   } catch (error) {

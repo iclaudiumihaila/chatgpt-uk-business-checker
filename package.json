@@ -5,8 +5,9 @@
   "type": "module",
   "main": "dist/server.js",
   "scripts": {
-    "build": "npm run build:server && npm run build:widgets",
+    "build": "npm run build:react-widgets && npm run build:server",
     "build:server": "tsc",
+    "build:react-widgets": "cd web && npm install && npm run build",
     "build:widgets": "node scripts/build-widgets.js",
     "dev": "tsx --watch src/server.ts",
     "start": "node dist/server.js",
