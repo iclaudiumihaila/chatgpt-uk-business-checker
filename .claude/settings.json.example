@@ -1,0 +1,11 @@
+{
+  "environments": {
+    "default": {
+      "name": "Business Checker Environment",
+      "networkAccess": "limited",
+      "environmentVariables": {
+        "COMPANIES_HOUSE_API_KEY": "your_api_key_here"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "chatgpt-uk-business-checker",
+  "version": "1.0.0",
+  "description": "ChatGPT App for UK business verification and due diligence",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "chatgpt",
+    "mcp",
+    "companies-house",
+    "uk",
+    "business",
+    "due-diligence",
+    "fraud-prevention"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}
